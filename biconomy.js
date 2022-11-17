@@ -96,19 +96,19 @@ async function TestnetBiconomyInit(){
 const sendMainnetTransaction = async() => {
     try {
         return new Promise((res, rej) => {
-            const mainnetAddress = "0x1aF7768737e41D227Fd0f6330Ed7B0ad846A8B73";
+            const mainnetAddress = "0x2a1f1a91ed7b65fcbd1ab335973cf84db9a05137";
 
             let mainnetContract = new web3.eth.Contract(
                 CollectionAbi,
                 mainnetAddress
             );
             console.log('Sending Mainnet transaction.......')
-            mainnetContract.methods.mintUnderCollection("0x5E9f2865d4B46a17e15B48946419fCfE8271be5E", "Session_id", "0x2631e5e8717fAeaD0EBa72fEd5694aD1Fa0d3581", 1, 5, `ipfs://metadata`).send({
+            mainnetContract.methods.mintUnderCollection("0xd682785d825331b784ab0e3b1ea1ac172d391c1b", "Session_id", "0x2631e5e8717fAeaD0EBa72fEd5694aD1Fa0d3581", 1, 5, `ipfs://metadata`).send({
                     from: process.env.MINTER
             })
             .on('transactionHash', (hash) => console.log('Mainnet txhash', hash))
             .on('receipt', (response) => {res(); console.log('Mainnet transaction success!')})
-            .on('error', (err) => { res(); console.log('Testnet ERROR:', err)});
+            .on('error', (err) => { res(); console.log('Mainnet ERROR:', err)});
         });
     } catch(e) {
         console.log(e);
@@ -121,7 +121,7 @@ const sendTestnetTransaction = async() => {
     try {
 
         return new Promise((res, rej) => {
-            const testnetAddress = "0x8e86557984CF2C7212c4d44A1d5983d1CA06bdE0"
+            const testnetAddress = "0xd90e45041b591fb0edbc9a2fa7f710446b5cbc8f"
 
             let testnetContract = new web3Testnet.eth.Contract(
                 CollectionAbi,
@@ -129,7 +129,7 @@ const sendTestnetTransaction = async() => {
             );
 
             console.log('Sending Testnet transaction.......');
-            testnetContract.methods.mintUnderCollection("0x58C81dd9F7aB3cF3a6dC36bb2b9B84b76052C51C", "Session_id", "0x2631e5e8717fAeaD0EBa72fEd5694aD1Fa0d3581", 1, 5, `ipfs://metadata`).send({
+            testnetContract.methods.mintUnderCollection("0x660a7310d9bcd84776389a060a9d2fa298fb4da3", "Session_id", "0x2631e5e8717fAeaD0EBa72fEd5694aD1Fa0d3581", 1, 5, `ipfs://metadata`).send({
                 from: process.env.MINTER,
             })
             .on('transactionHash', (hash) => console.log('Testnet txhash', hash))
